@@ -1,7 +1,8 @@
 @import "screen";
 
 #large-navbar {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://www.pieuvre.ca/wp-content/uploads/2018/01/blade-runner-2049-screen02.jpg) center center;
+  //background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://www.pieuvre.ca/wp-content/uploads/2018/01/blade-runner-2049-screen02.jpg) center center;
+  background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
   color: white;
   padding-bottom: 24px;
   height: 250px;
@@ -155,7 +156,7 @@
   left: -250px;
   width: 250px;
   opacity: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://www.pieuvre.ca/wp-content/uploads/2018/01/blade-runner-2049-screen02.jpg) center center;
+  background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
   z-index: 42;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
@@ -205,4 +206,15 @@
     }
   }
 
+}
+
+#dark-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 5;
+  display: none;
 }
