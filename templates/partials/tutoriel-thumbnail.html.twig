@@ -1,0 +1,8 @@
+<a href="articles/{{ tutoriel.url }}">
+    <div class="tutoriel-thumbnail">
+        <div>
+            <h3>{{ tutoriel.title }}</h3>
+        </div>
+        <img src=" {{ asset('upload/' ~ tutoriel.id ~ '/thumbnail.jpg') }}">
+    </div>
+</a>

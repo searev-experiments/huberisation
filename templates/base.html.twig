@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Huberisation | Tech and stuff{% endblock %}</title>
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('build/css/base.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/nav.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/footer.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block nav %}
+            {% include 'nav.html.twig' %}
+        {% endblock %}
+        <div class="body">
+            {% block body %}{% endblock %}
+        </div>
+        {% block footer %}
+            {% include 'footer.html.twig' %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
+                    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+                    crossorigin="anonymous"></script>
+            <script src="{{ asset('build/js/nav.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

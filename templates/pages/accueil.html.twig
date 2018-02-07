@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/accueil.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/article-thumbnail.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/tutoriel-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <div id="featured-article">
+            <h2>A la Une</h2>
+            <a href="articles/{{ featured.url }}">
+                <div id="featured-thumbnail">
+                    <div>
+                        <h2>{{ featured.title }}</h2>
+                        {% if featured.epigraphe %}
+                            <h3>{{ featured.epigraphe }}</h3>
+                        {% endif %}
+                    </div>
+                    <img src=" {{ asset('upload/' ~ featured.id ~ '/thumbnail.jpg') }}">
+                </div>
+            </a>
+
+        </div>
+
+        <div id="twitter-feed">
+            <h2>Sur Twitter</h2>
+            <div id="tweets">
+                <a class="twitter-timeline" href="https://twitter.com/bastien_hub?ref_src=twsrc%5Etfw">Tweets by bastien_hub</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="list-wrapper">
+        <h2>Derniers articles</h2>
+        <section id="articles">
+            {% for article in articles %}
+                {{ include('partials/article-thumbnail.html.twig', { 'article': article }) }}
+            {% endfor %}
+        </section>
+    </div>
+
+    <div class="list-wrapper">
+        <h2>Derniers tutoriels</h2>
+        <section id="articles">
+            {% for tutoriel in tutoriels %}
+                {{ include('partials/tutoriel-thumbnail.html.twig', { 'tutoriel': tutoriel}) }}
+            {% endfor %}
+        </section>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/article-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <a href="articles/{{ featured.url }}">
+        <header>
+            <img src="{{ asset('upload/' ~ featured.id ~ '/thumbnail.jpg') }}">
+            <div class="article-info">
+                <h1>{{ featured.title }}</h1>
+                <h3>{{ featured.epigraphe }}</h3>
+                <div class="author">
+                    <img src="https://avatars0.githubusercontent.com/u/11649293?s=400&v=4">
+                    <div>
+                        <p><strong>Bastien Huber</strong></p>
+                        <p>Publié le {{ featured.date | date("m/d/Y") }}</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </a>
+
+    <section id="articles">
+        {% for article in articles %}
+            {{ include('partials/article-thumbnail.html.twig', { 'article': article }) }}
+        {% endfor %}
+    </section>
+
+{% endblock %}

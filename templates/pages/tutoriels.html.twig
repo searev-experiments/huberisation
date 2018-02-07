@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutoriels | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/tutoriels.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/tutoriel-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <section id="articles">
+        {% for tutoriel in tutoriels %}
+            {{ include('partials/tutoriel-thumbnail.html.twig', { 'tutoriel': tutoriel }) }}
+        {% endfor %}
+    </section>
+
+{% endblock %}

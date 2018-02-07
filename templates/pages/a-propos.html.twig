@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/a-propos.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="about">
+        <h1>A propos</h1>
+
+        <h2>Qui s'occupe de ce site ?</h2>
+        <div>
+
+            <p>
+                Je suis Bastien Huber, un jeune ingénieur diplômé de l’Ecole Centrale de Lille. Passionné par les nouvelles technologies, mais également souvent critique au regard de leur utilisation, je cherche à m’impliquer dans des projets qui les utiliseront de manière éthique. A savoir, ne pas revendre l’information de leurs utilisateurs, les espionner, ou trouver des biais psychologiques pour les faire regarder leur smartphone toutes les 2 minutes.
+            </p>
+
+            <p>
+                Au début de l’année 2018, j’ai lancé <a href="https://treviz.xyz">Treviz</a> ; une plateforme dédiée à la création d’organisations ouvertes et collaboratives. L’idée est de permettre à chaque collaborateur d’avoir son mot à dire sur la répartition du budget, de décider sur quel projet il ou elle peut être amener à travailler, etc. Le travail de chacun est lié par la blockchain, ce qui permet de répartir équitablement les bénéfices.
+            </p>
+
+            <p>
+                J’aime aussi cuisiner (principalement des pâtisseries et des plats végétaliens), regarder des films ou séries, courir, danser, écouter du Pink Floyd, jouer aux jeux de société, jouer sur scène…
+            </p>
+
+            <h2>Pourquoi ce nom ?</h2>
+            <p>
+                Après de trop nombreuses blagues sur la proximité entre mon nom et celui de « Uber », qui a donné lieu à un adjectif qui me rend malade, j’ai décidé d’acheter le nom de domaine « huberisation.eu », à la fois comme boutade, mais aussi pour réellement partager mes connaissances. J’espère qu’il vous sera utile !
+            </p>
+
+            <h2>Comment le site est-il réalisé ?</h2>
+            Ce site est actuellement :
+            <ul>
+                <li>Hébergé chez <a href="https://www.ovh.com">OVH</a></li>
+                <li>Codé avec <a href="http://symfony.com/">Symfony 4</a></li>
+                <li>Open sourcé sur <a href="https://github.com/searev">Github</a></li>
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}

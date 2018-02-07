@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }} | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/article.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/markdown.css') }}">
+{% endblock %}
+
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="article">
+
+        <div class="author">
+            <h2>A propos de l'auteur</h2>
+            <img src="https://avatars0.githubusercontent.com/u/11649293?s=400&v=4">
+            <h3>Bastien Huber</h3>
+            <p>Jeune ingénieur, fondateur de <a href="http://treviz.xyz">Treviz</a>,
+                partisan d'un internet plus libre, ouvert, décentralisé et
+                respectueux de la vie privée. Suit des cours pour devenir social
+                justice warrior et prépare des cookies vegan.
+        </div>
+
+        <div class="content">
+            <h1>{{ article.title }}</h1>
+            <section class="markdown-body">{{ article.content | markdown }}</section>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

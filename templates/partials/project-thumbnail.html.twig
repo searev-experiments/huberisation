@@ -1,0 +1,11 @@
+<div class="project-thumbnail">
+    <img src="{{ project.logoUrl }}">
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.description }}</p>
+
+    <div class="actions">
+        {% if project.website %} <a href="{{ project.website }}">Site Web</a> {% endif %}
+        {% if project.github %} <a href="{{ project.github }}">Github</a> {% endif %}
+        {% if project.gitlab %} <a href="{{ project.gitlab }}">Gitlab</a> {% endif %}
+    </div>
+</div>

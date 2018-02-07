@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/projets.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/project-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <section id="projects">
+        {% for project in projects %}
+            {{ include('partials/project-thumbnail.html.twig', { 'project': project }) }}
+        {% endfor %}
+    </section>
+
+{% endblock %}

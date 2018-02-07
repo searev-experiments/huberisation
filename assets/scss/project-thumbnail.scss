@@ -1,0 +1,51 @@
+.project-thumbnail {
+  width: 400px;
+  height: 400px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px 0 rgba(0,0,0,0.5);
+  margin: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+
+  > img {
+    height: 125px;
+  }
+
+  > p {
+    text-align: justify;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    > a {
+      padding: 6px 24px;
+      margin: 0 12px;
+      line-height: 25px;
+      border-radius: 5px;
+      -webkit-transition: all .5s;
+      -moz-transition: all .5s;
+      -ms-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+      color: black;
+
+      &:hover {
+        background: rgba(0,0,0,0.2);
+        -webkit-transition: all .2s;
+        -moz-transition: all .2s;
+        -ms-transition: all .2s;
+        -o-transition: all .2s;
+        transition: all .2s;
+      }
+    }
+  }
+
+}
