@@ -13,21 +13,22 @@
 {% block body %}
 
     <header>
-        <div id="featured-article">
-            <h2>A la Une</h2>
-            <a href="articles/{{ featured.url }}">
-                <div id="featured-thumbnail">
-                    <div>
-                        <h2>{{ featured.title }}</h2>
-                        {% if featured.epigraphe %}
-                            <h3>{{ featured.epigraphe }}</h3>
-                        {% endif %}
+        {% if featured != null %}
+            <div id="featured-article">
+                <h2>A la Une</h2>
+                <a href="articles/{{ featured.url }}">
+                    <div id="featured-thumbnail">
+                        <div>
+                            <h2>{{ featured.title }}</h2>
+                            {% if featured.epigraphe %}
+                                <h3>{{ featured.epigraphe }}</h3>
+                            {% endif %}
+                        </div>
+                        <img src="{{ asset('uploads/articles/' ~ featured.vignette) }}">
                     </div>
-                    <img src=" {{ asset('upload/' ~ featured.id ~ '/thumbnail.jpg') }}">
-                </div>
-            </a>
-
-        </div>
+                </a>
+            </div>
+        {% endif %}
 
         <div id="twitter-feed">
             <h2>Sur Twitter</h2>

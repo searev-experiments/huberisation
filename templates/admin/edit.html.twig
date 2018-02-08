@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/form.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="big-card">
+        <h1>Mettre à jour un article</h1>
+
+        {{ form(form) }}
+    </div>
+
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 <a href="articles/{{ article.url }}">
     <div class="article-thumbnail">
-        <img src=" {{ asset('upload/' ~ article.id ~ '/thumbnail.jpg') }}">
+        <img src="{{ asset('uploads/articles/' ~ article.vignette) }}">
         <div class="article-thumbnail-info">
             <h3>{{ article.title }}</h3>
             <h4> {{ article.epigraphe }}</h4>
@@ -10,7 +10,7 @@
                 </div>
                 <div>
                     <p><strong>Bastien Huber</strong></p>
-                    <p>Publié le {{ featured.date | date("m/d/Y") }}</p>
+                    <p>Publié le {{ article.date | date("m/d/Y") }}</p>
                 </div>
             </div>
         </div>

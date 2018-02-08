@@ -2,12 +2,16 @@
 
 {% block title %}404 | Huberisation{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/error.css') }}">
+{% endblock %}
+
 {% block nav %}
     {% include 'nav.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    <h1>Oups, la ressource que vous recherchez n'existe pas où a été déplacée.</h1>
+    <h1 id="error-message">Oups, la ressource que vous recherchez n'existe pas où a été déplacée.</h1>
 
 {% endblock %}

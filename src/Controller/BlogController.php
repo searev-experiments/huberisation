@@ -39,7 +39,7 @@ class BlogController extends Controller
             ->getQuery()
             ->getResult();
 
-        /** @var Article[] $articles */
+        /** @var Article[] $tutoriels */
         $tutoriels = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
             ->andWhere('article.tutoriel = TRUE')
             ->orderBy('article.date', 'DESC')
@@ -47,13 +47,30 @@ class BlogController extends Controller
             ->getQuery()
             ->getResult();
 
+        $nbArticles = sizeof($articles);
+        $nbTutoriels = sizeof($tutoriels);
 
-
-        if (sizeof($articles) > 0) {
-            $featured = $articles[0];
-            $articles = array_splice($articles, 1);
+        if ($nbTutoriels == 0 && $nbArticles == 0) {
+            $featured = null;
         } else {
-            $featured = new Article();
+            if ($nbTutoriels == 0) {
+                $featured = $articles[0];
+                $articles = array_splice($articles, 1);
+            } elseif ($nbArticles == 0) {
+                $featured = $tutoriels[0];
+                $tutoriels = array_splice($tutoriels, 1);
+            } else {
+                $lastArticle = $articles[0];
+                $lastTutoriel = $tutoriels[0];
+
+                if ($lastArticle->getDate() > $lastTutoriel->getDate()) {
+                    $featured = $lastArticle;
+                    $articles = array_splice($articles, 1);
+                } else {
+                    $featured = $tutoriels[0];
+                    $tutoriels = array_splice($tutoriels, 1);
+                }
+            }
         }
 
         return new Response($twig->render('pages/accueil.html.twig', array('articles' => $articles, 'featured' => $featured, 'tutoriels' => $tutoriels)));

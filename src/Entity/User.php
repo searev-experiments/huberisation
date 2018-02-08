@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_users")
@@ -28,6 +29,14 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
+
+    /**
+     * @var string $plainPassword
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -83,6 +92,25 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;

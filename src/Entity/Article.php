@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -27,7 +28,7 @@ class Article
     /**
      * @var string $epigraphe
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $epigraphe;
 
@@ -73,6 +74,14 @@ class Article
     private $tutoriel = false;
 
     /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Une vignette est nécessaire pour cet article")
+     * @Assert\File(mimeTypes={ "image/gif", "image/jpeg", "image/png", "image/svg+xml" })
+     */
+    private $vignette;
+
+    /**
      * Article constructor.
      */
     public function __construct()
@@ -91,7 +100,7 @@ class Article
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -107,7 +116,7 @@ class Article
     /**
      * @return ArrayCollection
      */
-    public function getTags(): ArrayCollection
+    public function getTags(): ?ArrayCollection
     {
         return $this->tags;
     }
@@ -139,7 +148,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
@@ -147,7 +156,7 @@ class Article
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -163,7 +172,7 @@ class Article
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -179,7 +188,7 @@ class Article
     /**
      * @return bool
      */
-    public function isBlog(): bool
+    public function isBlog(): ?bool
     {
         return $this->blog;
     }
@@ -195,7 +204,7 @@ class Article
     /**
      * @return bool
      */
-    public function isTutoriel(): bool
+    public function isTutoriel(): ?bool
     {
         return $this->tutoriel;
     }
@@ -211,7 +220,7 @@ class Article
     /**
      * @return string
      */
-    public function getEpigraphe(): string
+    public function getEpigraphe(): ?string
     {
         return $this->epigraphe;
     }
@@ -222,6 +231,22 @@ class Article
     public function setEpigraphe(string $epigraphe): void
     {
         $this->epigraphe = $epigraphe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVignette()
+    {
+        return $this->vignette;
+    }
+
+    /**
+     * @param mixed $vignette
+     */
+    public function setVignette($vignette): void
+    {
+        $this->vignette = $vignette;
     }
 
 }

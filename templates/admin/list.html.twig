@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/admin-list.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/article-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Module d'administration</h1>
+        <a href="{{ path('app_admin_writearticle') }}">
+            <i class="fas fa-pencil-alt"></i>
+            Nouvel article
+        </a>
+    </header>
+
+
+    <section id="articles">
+        {% for article in articles %}
+            <div>
+                {{ include('partials/article-thumbnail.html.twig', { 'article': article }) }}
+
+                <div class="actions">
+                    <a class="edit" href="{{ path('app_admin_editarticle', {'id': article.id}) }}"><i class="far fa-edit"></i></a>
+                    <a class="delete"><i class="far fa-trash-alt"></i></a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </section>
+
+{% endblock %}
