@@ -1,6 +1,14 @@
+@import "screen";
+
 .about {
-  width: 60%;
-  margin: 12px auto 42px auto;
+  width: 66%;
+  margin: 42px auto;
+
+  @include breakpoint-medium {
+    width: 90%;
+    margin: auto;
+    padding: 0;
+  }
 
   h1 {
     font-size: 2rem;

@@ -16,10 +16,16 @@
 
     <header>
         <h1>Module d'administration</h1>
-        <a href="{{ path('app_admin_writearticle') }}">
-            <i class="fas fa-pencil-alt"></i>
-            Nouvel article
-        </a>
+        <div>
+            <a href="{{ path('app_admin_writearticle') }}">
+                <i class="fas fa-pencil-alt"></i>
+                Nouvel article
+            </a>
+            <a href="{{ path('app_admin_createproject') }}">
+                <i class="fas fa-pencil-alt"></i>
+                Nouveau projet
+            </a>
+        </div>
     </header>
 
 

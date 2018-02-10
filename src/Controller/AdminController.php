@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Entity\Project;
 use App\Form\ArticleType;
+use App\Form\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +44,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/create")
+     * @Route("/admin/articles/create")
      *
      * @param Environment $twig
      * @return Response
@@ -65,7 +67,7 @@ class AdminController extends Controller
 
             // moves the file to the directory where brochures are stored
             $file->move(
-                $this->getParameter('vignette_upload_directory'),
+                $this->getParameter('article_upload_directory'),
                 $fileName
             );
 
@@ -85,7 +87,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/edit/{id}")
+     * @Route("/admin/articles/{id}/edit")
      *
      * @param Environment $twig
      * @return Response
@@ -109,7 +111,7 @@ class AdminController extends Controller
 
             // moves the file to the directory where brochures are stored
             $file->move(
-                $this->getParameter('vignette_upload_directory'),
+                $this->getParameter('article_upload_directory'),
                 $fileName
             );
 
@@ -124,6 +126,50 @@ class AdminController extends Controller
         }
 
         return new Response($twig->render('admin/edit.html.twig', array('form' => $form->createView())));
+    }
+
+    /**
+     * @Route("/admin/projects/create")
+     *
+     * @param Environment $twig
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function createProjectAction(Environment $twig, Request $request)
+    {
+        $project = new Project();
+        $form = $this->createForm(ProjectType::class, $project);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $project->getLogo();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('project_upload_directory'),
+                $fileName
+            );
+
+            // updates the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $project->setLogo($fileName);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+
+            return $this->redirectToRoute('app_admin_admin');
+        }
+
+        return new Response($twig->render('admin/create-project.html.twig', array('form' => $form->createView())));
     }
 
 }

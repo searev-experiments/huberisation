@@ -2,7 +2,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    vignette_upload_directory: '%kernel.project_dir%/public/uploads/articles'
+    article_upload_directory: '%kernel.project_dir%/public/uploads/articles'
+    project_upload_directory: '%kernel.project_dir%/public/uploads/projects'
 
 services:
     # default configuration for services in *this* file

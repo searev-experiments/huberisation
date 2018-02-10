@@ -11,7 +11,7 @@
 header {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: -50px;
   margin-bottom: 42px;
 
@@ -33,13 +33,26 @@ header {
     overflow: hidden;
 
     @include breakpoint-x-small {
-      width: 90vw;
+      width: 300px;
+      height: 270px;
     }
 
     #featured-thumbnail {
       width: 100%;
       height: 350px;
       border-radius: 5px;
+
+      @include breakpoint-x-small {
+        height: 200px;
+
+        h2 {
+          font-size: 1.2rem;
+        }
+
+        h3 {
+          display: none;
+        }
+      }
 
       > div {
         height: 100%;
@@ -62,6 +75,13 @@ header {
         z-index: 0;
         position: relative;
         top: -350px;
+
+        @include breakpoint-x-small {
+          width: 300px;
+          height: 200px;
+          top: -200px;
+        }
+
       }
 
     }

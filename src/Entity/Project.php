@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -32,30 +33,31 @@ class Project
     private $description;
 
     /**
-     * @var string $logo_url
+     * @ORM\Column(type="string")
      *
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Un logo est nécessaire pour ce projet")
+     * @Assert\File(mimeTypes={ "image/gif", "image/jpeg", "image/png", "image/svg+xml" })
      */
-    private $logo_url;
+    private $logo;
 
     /**
      * @var string $website
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $website;
 
     /**
      * @var string $github
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $github;
 
     /**
      * @var string $gitlab
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $gitlab;
 
@@ -65,6 +67,11 @@ class Project
      * @ORM\ManyToMany(targetEntity="Tag")
      */
     private $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -85,7 +92,7 @@ class Project
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -101,7 +108,7 @@ class Project
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -115,25 +122,25 @@ class Project
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getLogoUrl(): string
+    public function getLogo()
     {
-        return $this->logo_url;
+        return $this->logo;
     }
 
     /**
-     * @param string $logo_url
+     * @param $logo
      */
-    public function setLogoUrl(string $logo_url): void
+    public function setLogo($logo): void
     {
-        $this->logo_url = $logo_url;
+        $this->logo = $logo;
     }
 
     /**
      * @return string
      */
-    public function getWebsite(): string
+    public function getWebsite(): ?string
     {
         return $this->website;
     }
@@ -149,7 +156,7 @@ class Project
     /**
      * @return string
      */
-    public function getGithub(): string
+    public function getGithub(): ?string
     {
         return $this->github;
     }
@@ -165,7 +172,7 @@ class Project
     /**
      * @return ArrayCollection
      */
-    public function getTags(): ArrayCollection
+    public function getTags(): ?ArrayCollection
     {
         return $this->tags;
     }
@@ -181,7 +188,7 @@ class Project
     /**
      * @return string
      */
-    public function getGitlab(): string
+    public function getGitlab(): ?string
     {
         return $this->gitlab;
     }
