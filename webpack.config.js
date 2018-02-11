@@ -14,6 +14,7 @@ Encore
      * Add JS
      */
      .addEntry('js/nav', './assets/js/nav.js')
+     .addEntry('js/emoji', './assets/js/emoji.js')
 
     /*
      * Add CSS / SCSS

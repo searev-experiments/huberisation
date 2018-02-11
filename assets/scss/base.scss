@@ -15,3 +15,9 @@ html, body {
 strong {
   font-weight: bold;
 }
+
+img.emoji {
+  // Override any img styles to ensure Emojis are displayed inline
+  margin: 0 !important;
+  display: inline !important;
+}

@@ -1,12 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@bastien_hub">
+    <meta name="twitter:title" content="{{ article.title }}">
+    {% if article.epigraphe %}
+        <meta name="twitter:description" content="{{ article.epigraphe }}">
+    {% endif %}
+    <meta name="twitter:image:src" content="{{ asset('https://huberisation.eu/uploads/articles/' ~ article.vignette) }}">
+{% endblock %}
+
 {% block title %}{{ article.title }} | Huberisation{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/css/article.css') }}">
     <link rel="stylesheet" href="{{ asset('build/css/markdown.css') }}">
 {% endblock %}
-
 
 {% block nav %}
     {% include 'nav.html.twig' %}
