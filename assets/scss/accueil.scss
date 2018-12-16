@@ -75,6 +75,7 @@ header {
         z-index: 0;
         position: relative;
         top: -350px;
+        object-fit: cover;
 
         @include breakpoint-x-small {
           width: 300px;

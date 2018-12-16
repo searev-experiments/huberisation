@@ -98,7 +98,7 @@ class AdminController extends Controller
     public function editArticleAction(Environment $twig, Request $request, $id)
     {
         $article = $this->getDoctrine()->getRepository('App:Article')->find($id);
-        $article->setVignette(new File($this->getParameter('vignette_upload_directory') . '/' . $article->getVignette()));
+        $article->setVignette(new File($this->getParameter('article_upload_directory') . '/' . $article->getVignette()));
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);

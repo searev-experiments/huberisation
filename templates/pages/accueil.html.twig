@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@bastien_hub">
+    <meta name="twitter:title" content="Huberisation">
+    <meta name="twitter:description" content="Exploration et analyse des nouvelles technologies et de leur impact ; si possible sans bullshit">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/css/accueil.css') }}">
     <link rel="stylesheet" href="{{ asset('build/css/article-thumbnail.css') }}">

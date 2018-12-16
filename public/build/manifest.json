@@ -1,0 +1,21 @@
+{
+  "build/css/a-propos.css": "/build/css/a-propos.css",
+  "build/css/accueil.css": "/build/css/accueil.css",
+  "build/css/admin-list.css": "/build/css/admin-list.css",
+  "build/css/article-thumbnail.css": "/build/css/article-thumbnail.css",
+  "build/css/article.css": "/build/css/article.css",
+  "build/css/base.css": "/build/css/base.css",
+  "build/css/blog.css": "/build/css/blog.css",
+  "build/css/error.css": "/build/css/error.css",
+  "build/css/footer.css": "/build/css/footer.css",
+  "build/css/form.css": "/build/css/form.css",
+  "build/css/login.css": "/build/css/login.css",
+  "build/css/markdown.css": "/build/css/markdown.css",
+  "build/css/nav.css": "/build/css/nav.css",
+  "build/css/project-thumbnail.css": "/build/css/project-thumbnail.css",
+  "build/css/projets.css": "/build/css/projets.css",
+  "build/css/tutoriel-thumbnail.css": "/build/css/tutoriel-thumbnail.css",
+  "build/css/tutoriels.css": "/build/css/tutoriels.css",
+  "build/js/emoji.js": "/build/js/emoji.js",
+  "build/js/nav.js": "/build/js/nav.js"
+}
