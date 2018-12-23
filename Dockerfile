@@ -29,7 +29,7 @@ RUN node_modules/.bin/encore production
 
 # Remove nodejs and other dependencies
 RUN apt remove -y nodejs && \
-    apt autoremove - && \
+    apt autoremove -y && \
     apt clean
 
 RUN php bin/console cache:clear --env=prod --no-debug
