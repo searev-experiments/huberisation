@@ -1,11 +1,10 @@
 @import "screen";
 
 #large-navbar {
-  //background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://www.pieuvre.ca/wp-content/uploads/2018/01/blade-runner-2049-screen02.jpg) center center;
   background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
   color: white;
   padding-bottom: 24px;
-  height: 250px;
+  height: 290px !important;
 
   @include breakpoint-small {
     height: 100px !important;
@@ -37,7 +36,6 @@
         margin: 12px;
         -webkit-transition: all .2s;
         -moz-transition: all .2s;
-        -ms-transition: all .2s;
         -o-transition: all .2s;
         transition: all .2s;
 
@@ -45,7 +43,6 @@
           background-color: rgba(0, 0, 0, 0.9);
           -webkit-transition: all .5s;
           -moz-transition: all .5s;
-          -ms-transition: all .5s;
           -o-transition: all .5s;
           transition: all .5s;
         }
@@ -99,7 +96,6 @@
       border-radius: 5px;
       -webkit-transition: all .5s;
       -moz-transition: all .5s;
-      -ms-transition: all .5s;
       -o-transition: all .5s;
       transition: all .5s;
 
@@ -107,7 +103,6 @@
         background: rgba(0,0,0,0.5);
         -webkit-transition: all .2s;
         -moz-transition: all .2s;
-        -ms-transition: all .2s;
         -o-transition: all .2s;
         transition: all .2s;
       }
@@ -140,7 +135,6 @@
   background-color: #E0E0E0;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
-  -ms-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
 
@@ -160,7 +154,6 @@
   z-index: 42;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
-  -ms-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
 
@@ -179,7 +172,6 @@
       padding: 12px 0;
       -webkit-transition: all .5s;
       -moz-transition: all .5s;
-      -ms-transition: all .5s;
       -o-transition: all .5s;
       transition: all .5s;
 
@@ -187,7 +179,6 @@
         background: rgba(0,0,0,0.5);
         -webkit-transition: all .2s;
         -moz-transition: all .2s;
-        -ms-transition: all .2s;
         -o-transition: all .2s;
         transition: all .2s;
       }

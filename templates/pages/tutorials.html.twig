@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tutoriels | Huberisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/tutorials.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/tutorial-thumbnail.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <section id="articles">
+        {% for tutorial in tutorials %}
+            {{ include('partials/tutorial-thumbnail.html.twig', { 'tutorial': tutorial }) }}
+        {% endfor %}
+    </section>
+
+{% endblock %}
