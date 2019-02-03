@@ -13,16 +13,53 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findLatestArticles()
     {
-        return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.tutorial = FALSE')
+            ->orderBy('article.date', 'DESC')
+            ->setMaxResults(5)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
+    public function findLatestTutorials()
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.tutorial = TRUE')
+            ->orderBy('article.date', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findArticles($offset)
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.blog = TRUE')
+            ->orderBy('article.date', 'DESC')
+            ->setMaxResults(20)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTutorials($offset)
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.tutorial = TRUE')
+            ->orderBy('article.date', 'DESC')
+            ->setMaxResults(20)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllArticles()
+    {
+        return $this->createQueryBuilder('article')
+            ->orderBy('article.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -13,6 +13,16 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    public function findProjects($offset)
+    {
+        return $this->createQueryBuilder('project')
+            ->orderBy('project.id', 'DESC')
+            ->setMaxResults(20)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findBySomething($value)
     {

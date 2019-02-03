@@ -13,14 +13,14 @@ use App\Entity\Article;
 use App\Entity\Project;
 use App\Form\ArticleType;
 use App\Form\ProjectType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class AdminController extends Controller
+class AdminController extends AbstractController
 {
 
     /**
@@ -32,27 +32,33 @@ class AdminController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function adminAction(Environment $twig)
+    public function adminAction(Environment $twig): Response
     {
 
-        $articles = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
-            ->orderBy('article.date', 'DESC')
-            ->getQuery()
-            ->getResult();
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository('App:Article')
+            ->findAllArticles();
 
-        return new Response($twig->render('admin/list.html.twig', array('articles' => $articles)));
+        return new Response(
+            $twig->render('admin/list.html.twig',
+                array('articles' => $articles)
+            )
+        );
     }
 
     /**
      * @Route("/admin/articles/create")
      *
      * @param Environment $twig
+     * @param Request     $request
+     *
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function writeArticleAction(Environment $twig, Request $request)
+    public function writeArticleAction(Environment $twig, Request $request): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -83,22 +89,33 @@ class AdminController extends Controller
             return $this->redirectToRoute('app_admin_admin');
         }
 
-        return new Response($twig->render('admin/create.html.twig', array('form' => $form->createView())));
+        return new Response(
+            $twig->render('admin/create.html.twig',
+                array('form' => $form->createView())
+            )
+        );
     }
 
     /**
      * @Route("/admin/articles/{id}/edit")
      *
      * @param Environment $twig
+     * @param Request     $request
+     * @param             $id
+     *
      * @return Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function editArticleAction(Environment $twig, Request $request, $id)
+    public function editArticleAction(Environment $twig, Request $request, $id): Response
     {
         $article = $this->getDoctrine()->getRepository('App:Article')->find($id);
-        $article->setVignette(new File($this->getParameter('article_upload_directory') . '/' . $article->getVignette()));
+        $article->setVignette(
+            new File(
+                $this->getParameter('article_upload_directory') . '/' . $article->getVignette()
+            )
+        );
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
@@ -107,7 +124,7 @@ class AdminController extends Controller
 
             $file = $article->getVignette();
 
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             // moves the file to the directory where brochures are stored
             $file->move(
@@ -125,7 +142,11 @@ class AdminController extends Controller
             return $this->redirectToRoute('app_admin_admin');
         }
 
-        return new Response($twig->render('admin/edit.html.twig', array('form' => $form->createView())));
+        return new Response(
+            $twig->render('admin/edit.html.twig',
+                array('form' => $form->createView())
+            )
+        );
     }
 
     /**
@@ -138,7 +159,7 @@ class AdminController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function createProjectAction(Environment $twig, Request $request)
+    public function createProjectAction(Environment $twig, Request $request): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -169,7 +190,11 @@ class AdminController extends Controller
             return $this->redirectToRoute('app_admin_admin');
         }
 
-        return new Response($twig->render('admin/create-project.html.twig', array('form' => $form->createView())));
+        return new Response(
+            $twig->render('admin/create-project.html.twig',
+                array('form' => $form->createView())
+            )
+        );
     }
 
 }

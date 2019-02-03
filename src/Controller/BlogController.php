@@ -10,12 +10,12 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class BlogController extends Controller
+class BlogController extends AbstractController
 {
 
     /**
@@ -31,49 +31,52 @@ class BlogController extends Controller
      */
     public function getHomeAction(Environment $twig) {
 
-        /** @var Article[] $articles */
-        $articles = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
-            ->andWhere('article.tutoriel = FALSE')
-            ->orderBy('article.date', 'DESC')
-            ->setMaxResults(5)
-            ->getQuery()
-            ->getResult();
+        $repository = $this
+            ->getDoctrine()
+            ->getRepository('App:Article');
 
-        /** @var Article[] $tutoriels */
-        $tutoriels = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
-            ->andWhere('article.tutoriel = TRUE')
-            ->orderBy('article.date', 'DESC')
-            ->setMaxResults(5)
-            ->getQuery()
-            ->getResult();
+        /** @var Article[] $articles */
+        $articles = $repository->findLatestArticles();
+
+        /** @var Article[] $tutorials */
+        $tutorials = $repository->findLatestTutorials();
 
         $nbArticles = sizeof($articles);
-        $nbTutoriels = sizeof($tutoriels);
+        $nbTutorials = sizeof($tutorials);
 
-        if ($nbTutoriels == 0 && $nbArticles == 0) {
+        if ($nbTutorials == 0 && $nbArticles == 0) {
             $featured = null;
         } else {
-            if ($nbTutoriels == 0) {
+            if ($nbTutorials == 0) {
                 $featured = $articles[0];
                 $articles = array_splice($articles, 1);
             } elseif ($nbArticles == 0) {
-                $featured = $tutoriels[0];
-                $tutoriels = array_splice($tutoriels, 1);
+                $featured = $tutorials[0];
+                $tutorials = array_splice($tutorials, 1);
             } else {
                 $lastArticle = $articles[0];
-                $lastTutoriel = $tutoriels[0];
+                $lastTutorial = $tutorials[0];
 
-                if ($lastArticle->getDate() > $lastTutoriel->getDate()) {
+                if ($lastArticle->getDate() > $lastTutorial->getDate()) {
                     $featured = $lastArticle;
                     $articles = array_splice($articles, 1);
                 } else {
-                    $featured = $tutoriels[0];
-                    $tutoriels = array_splice($tutoriels, 1);
+                    $featured = $tutorials[0];
+                    $tutorials = array_splice($tutorials, 1);
                 }
             }
         }
 
-        return new Response($twig->render('pages/accueil.html.twig', array('articles' => $articles, 'featured' => $featured, 'tutoriels' => $tutoriels)));
+        return new Response(
+            $twig->render(
+                'pages/home.html.twig',
+                array(
+                    'articles' => $articles,
+                    'featured' => $featured,
+                    'tutorials' => $tutorials
+                )
+            )
+        );
     }
 
     /**
@@ -89,21 +92,25 @@ class BlogController extends Controller
      */
     public function getBlogAction(Environment $twig) {
 
-        $articles = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
-            ->andWhere('article.blog = TRUE')
-            ->orderBy('article.date', 'DESC')
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult();
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository('App:Article')
+            ->findArticles(0);
 
         if (sizeof($articles) > 0) {
             $featured = $articles[0];
             $articles = array_splice($articles, 1);
         } else {
-            $featured = new Article();
+            $featured = null;
         }
 
-        return new Response($twig->render('pages/blog.html.twig', array('articles' => $articles, 'featured' => $featured)));
+        return new Response(
+            $twig->render('pages/blog.html.twig',
+                array(
+                    'articles' => $articles,
+                    'featured' => $featured)
+            )
+        );
     }
 
     /**
@@ -119,13 +126,16 @@ class BlogController extends Controller
      */
     public function getProjectsAction(Environment $twig) {
 
-        $projects = $this->getDoctrine()->getRepository('App:Project')->createQueryBuilder('project')
-            ->orderBy('project.id', 'DESC')
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult();
+        $projects = $this
+            ->getDoctrine()
+            ->getRepository('App:Project')
+            ->findProjects(0);
 
-        return new Response($twig->render('pages/projets.html.twig', array('projects' => $projects)));
+        return new Response(
+            $twig->render('pages/projets.html.twig',
+                array('projects' => $projects)
+            )
+        );
     }
 
     /**
@@ -139,16 +149,19 @@ class BlogController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function getTutoAction(Environment $twig) {
+    public function getTutorialAction(Environment $twig) {
 
-        $tutoriels = $this->getDoctrine()->getRepository('App:Article')->createQueryBuilder('article')
-            ->andWhere('article.tutoriel = TRUE')
-            ->orderBy('article.date', 'DESC')
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult();
+        $tutorial = $this
+            ->getDoctrine()
+            ->getRepository('App:Article')
+            ->findTutorials(0);
 
-        return new Response($twig->render('pages/tutoriels.html.twig', array('tutoriels' => $tutoriels)));
+        return new Response(
+            $twig->render(
+                'pages/tutorials.html.twig',
+                array('tutorials' => $tutorial)
+            )
+        );
     }
 
     /**

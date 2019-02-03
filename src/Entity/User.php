@@ -1,248 +1,161 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: huber
- * Date: 07/02/2018
- * Time: 16:12
- */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $username;
 
     /**
-     * @var string $plainPassword
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @ORM\Column(type="json")
      */
-    private $plainPassword;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $lastname;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $avatarUrl;
-
-    /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
      */
-    private $isActive;
-
-    public function __construct()
+    public function getUsername(): string
     {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
+        return (string) $this->username;
     }
 
-    public function getUsername()
+    public function setUsername(string $username): self
     {
-        return $this->username;
+        $this->username = $username;
+
+        return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
     public function getSalt()
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
+        // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
     /**
-     * @return string
+     * @see UserInterface
      */
-    public function getPlainPassword(): string
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param string $plainPassword
-     */
-    public function setPlainPassword(string $plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_ADMIN');
-    }
-
     public function eraseCredentials()
     {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    /** @see \Serializable::serialize() */
-    public function serialize()
+    public function getFirstName(): ?string
     {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
+        return $this->firstName;
     }
 
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
+    public function setFirstName(string $firstName): self
     {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
+        $this->firstName = $firstName;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFirstname()
+    public function getLastName(): ?string
     {
-        return $this->firstname;
+        return $this->lastName;
     }
 
-    /**
-     * @param mixed $firstname
-     */
-    public function setFirstname($firstname): void
+    public function setLastName(string $lastName): self
     {
-        $this->firstname = $firstname;
+        $this->lastName = $lastName;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
-    public function setLastname($lastname): void
-    {
-        $this->lastname = $lastname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param mixed $description
-     */
-    public function setDescription($description): void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAvatarUrl()
-    {
-        return $this->avatarUrl;
-    }
-
-    /**
-     * @param mixed $avatarUrl
-     */
-    public function setAvatarUrl($avatarUrl): void
-    {
-        $this->avatarUrl = $avatarUrl;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getisActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param mixed $isActive
-     */
-    public function setIsActive($isActive): void
-    {
-        $this->isActive = $isActive;
-    }
 
 }

@@ -20,10 +20,10 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class, array('label' => 'Titre'))
             ->add('vignette', FileType::class, array('label' => 'Vinette'))
             ->add('url', TextType::class, array('label' => 'Route'))
-            ->add('epigraphe', TextType::class, array('label' => 'Epigraphe', 'required' => false))
+            ->add('epigraph', TextType::class, array('label' => 'Epigraphe', 'required' => false))
             ->add('content', TextareaType::class, array('label' => 'Contenu de l`\'article'))
             ->add('blog', CheckboxType::class, array('label' => 'Publier dans \'Articles\' ?', 'required' => false))
-            ->add('tutoriel', CheckboxType::class, array('label' => 'Publier dans \'Tutoriels\' ?', 'required' => false))
+            ->add('tutorial', CheckboxType::class, array('label' => 'Publier dans \'Tutoriels\' ?', 'required' => false))
             ->add('publish', SubmitType::class, array('label' => 'Valider'));
     }
 

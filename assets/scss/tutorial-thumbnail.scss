@@ -1,0 +1,50 @@
+.tutorial-thumbnail {
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
+  margin-right: 24px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+  color: white;
+  font-weight: bold;
+
+  > div {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+      z-index: 1;
+    }
+  }
+
+  img {
+    width: 300px;
+    height: 200px;
+    filter: brightness(50%);
+    z-index: 0;
+    position: relative;
+    top: -200px;
+    object-fit: cover;
+  }
+
+
+  &:hover {
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+    transform: scale(1.01);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+  }
+}

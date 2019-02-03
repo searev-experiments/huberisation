@@ -26,19 +26,25 @@ class Article
     private $title;
 
     /**
-     * @var string $epigraphe
+     * Small text that will be displayed in the thumbnail
+     *
+     * @var string $epigraph
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $epigraphe;
+    private $epigraph;
 
     /**
+     * Tags to easily find this article
+     *
      * @var ArrayCollection $tags
      * @ORM\ManyToMany(targetEntity="Tag")
      */
     private $tags;
 
     /**
+     * Date the article was published.
+     *
      * @var \DateTime $date
      *
      * @ORM\Column(type="date")
@@ -46,6 +52,8 @@ class Article
     private $date;
 
     /**
+     * Markdown content of the article.
+     *
      * @var string $content
      *
      * @ORM\Column(type="text")
@@ -53,6 +61,8 @@ class Article
     private $content;
 
     /**
+     * URI of the article "/article/<uri>"
+     *
      * @var string url;
      *
      * @ORM\Column(type="string", length=255)
@@ -67,11 +77,13 @@ class Article
     private $blog = true;
 
     /**
-     * @var boolean $tutoriel
+     * Is this a simple article, or a tutorial ?
+     *
+     * @var boolean $tutorial
      *
      * @ORM\Column(type="boolean")
      */
-    private $tutoriel = false;
+    private $tutorial = false;
 
     /**
      * @ORM\Column(type="string")
@@ -204,33 +216,33 @@ class Article
     /**
      * @return bool
      */
-    public function isTutoriel(): ?bool
+    public function isTutorial(): ?bool
     {
-        return $this->tutoriel;
+        return $this->tutorial;
     }
 
     /**
-     * @param bool $tutoriel
+     * @param bool $tutorial
      */
-    public function setTutoriel(bool $tutoriel): void
+    public function setTutorial(bool $tutorial): void
     {
-        $this->tutoriel = $tutoriel;
+        $this->tutorial = $tutorial;
     }
 
     /**
      * @return string
      */
-    public function getEpigraphe(): ?string
+    public function getEpigraph(): ?string
     {
-        return $this->epigraphe;
+        return $this->epigraph;
     }
 
     /**
-     * @param string $epigraphe
+     * @param string $epigraph
      */
-    public function setEpigraphe(string $epigraphe): void
+    public function setEpigraph(string $epigraph): void
     {
-        $this->epigraphe = $epigraphe;
+        $this->epigraph = $epigraph;
     }
 
     /**
