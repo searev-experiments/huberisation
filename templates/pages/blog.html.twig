@@ -1,11 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block meta %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="@bastien_hub">
-    <meta name="twitter:title" content="Blog | Huberisation">
-{% endblock %}
-
 {% block title %}Blog | Huberisation{% endblock %}
 
 {% block stylesheets %}
@@ -21,12 +15,11 @@
 
     <a href="articles/{{ featured.url }}">
         <header>
-            <img src="{{ asset('uploads/articles/' ~ featured.vignette) }}">
+            <img src="{{ asset('uploads/articles/' ~ featured.vignette) }}" alt="{{ featured.title }}">
             <div class="article-info">
                 <h1>{{ featured.title }}</h1>
-                <h3>{{ featured.epigraphe }}</h3>
+                <h3>{{ featured.epigraph }}</h3>
                 <span>Publié le {{ featured.date | date("m/d/Y") }}</span>
-                </div>
             </div>
         </header>
     </a>

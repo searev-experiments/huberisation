@@ -8,9 +8,9 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/accueil.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('build/css/article-thumbnail.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/css/tutoriel-thumbnail.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/tutorial-thumbnail.css') }}">
 {% endblock %}
 
 {% block nav %}
@@ -27,8 +27,8 @@
                     <div id="featured-thumbnail">
                         <div>
                             <h2>{{ featured.title }}</h2>
-                            {% if featured.epigraphe %}
-                                <h3>{{ featured.epigraphe }}</h3>
+                            {% if featured.epigraph %}
+                                <h3>{{ featured.epigraph }}</h3>
                             {% endif %}
                         </div>
                         <img src="{{ asset('uploads/articles/' ~ featured.vignette) }}">
@@ -58,8 +58,8 @@
     <div class="list-wrapper">
         <h2>Derniers tutoriels</h2>
         <section id="articles">
-            {% for tutoriel in tutoriels %}
-                {{ include('partials/tutoriel-thumbnail.html.twig', { 'tutoriel': tutoriel}) }}
+            {% for tutorial in tutorials %}
+                {{ include('partials/tutorial-thumbnail.html.twig', { 'tutorial': tutorial }) }}
             {% endfor %}
         </section>
     </div>

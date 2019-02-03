@@ -1,14 +1,22 @@
-.tutoriel-thumbnail {
+#articles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+
+.tutorial-thumbnail {
   width: 300px;
   height: 200px;
   border-radius: 5px;
-  box-shadow: 0px 2px 10px 0 rgba(0,0,0,0.6);
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
   margin-right: 24px;
   margin-bottom: 24px;
   overflow: hidden;
   -webkit-transition: all .2s;
   -moz-transition: all .2s;
-  -ms-transition: all .2s;
   -o-transition: all .2s;
   transition: all .2s;
   color: white;
@@ -45,7 +53,6 @@
     transform: scale(1.01);
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
-    -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
   }
